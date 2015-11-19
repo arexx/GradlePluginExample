@@ -25,21 +25,22 @@ public class VersionExtension {
      * @return the version name as a period-separated string.
      */
     def versionName() {
-        StringBuilder builder = new StringBuilder();
-        builder.append(mVersionMap.get(Version.MAJOR.key)).append('.');
-        builder.append(mVersionMap.get(Version.MINOR.key)).append('.');
-        builder.append(mVersionMap.get(Version.BUGFIX.key)).append('.');
-        builder.append(mVersionMap.get(Version.ALPHA.key));
-        return builder.toString();
+        return String.format("%d.%d.%d.%02d",
+                mVersionMap.get(Version.MAJOR.key),
+                mVersionMap.get(Version.MINOR.key),
+                mVersionMap.get(Version.BUGFIX.key),
+                mVersionMap.get(Version.ALPHA.key));
     }
 
     /**
      * @return the version code as a number.
      */
     def versionCode() {
-        // Helper for Java programmers: 10**6 === Math.Pow(10, 6)
-        (mVersionMap.get(Version.MAJOR.key) * 10**6) + (mVersionMap.get(Version.MINOR.key) * 10**4) +
-                (mVersionMap.get(Version.BUGFIX.key) * 10**2) + (mVersionMap.get(Version.ALPHA.key))
+        return Integer.valueOf(String.format("14%d%d%d%02d",
+                mVersionMap.get(Version.MAJOR.key),
+                mVersionMap.get(Version.MINOR.key),
+                mVersionMap.get(Version.BUGFIX.key),
+                mVersionMap.get(Version.ALPHA.key)));
     }
 
     /**
